@@ -12,4 +12,10 @@
     <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Update="Guard.*.cs">
+      <DependentUpon>Guard.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

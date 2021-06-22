@@ -11,29 +11,13 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 using System;
+using System.Collections.Generic;
+using System.Text;
 using TSMoreland.GuardAssertions.Contracts;
 
 namespace TSMoreland.GuardAssertions
 {
-    public sealed partial class Guard 
+    public sealed partial class Guard : IValidationChecks
     {
-        /// <summary>
-        /// Private Constructor to ensure singleton access is only public method of use
-        /// </summary>
-        private Guard()
-        {
-        }
-
-        private static readonly Lazy<Guard> _instance = new(() => new Guard());
-
-        /// <summary>
-        /// Singleton instance providing access to Guard Assertions methods
-        /// </summary>
-        public static IAssertions Against => _instance.Value;
-
-        /// <summary>
-        /// Singleton instance providing access to Guard Checks
-        /// </summary>
-        public static IValidationChecks Check => _instance.Value;
     }
 }
