@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Terry Moreland</Authors>
+    <Company />
+    <langversion>9</langversion>
+    <nullable>enable</nullable>
+    <Description>Guard Check Assertions to verify arguments or values</Description>
+    <Copyright>Copyright © 2021 Terry Moreland</Copyright>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+  </PropertyGroup>
+
+</Project>
