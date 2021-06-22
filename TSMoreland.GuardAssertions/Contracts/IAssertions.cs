@@ -72,5 +72,25 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// if <paramref name="value"/> is empty or only contains whitespace
         /// </exception>
         void ArgumentNullOrWhitespace(string? value, string parameterName);
+
+        /// <summary>
+        /// checks if value is in the range [minimum, maximum)
+        /// (greater than or equal to minimum and less than maximum), throwing
+        /// <see cref="ArgumentOutOfRangeException"/> if it is not
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="minimum">lower inclusive bound of the range</param>
+        /// <param name="maximum">upper non-incluseive bound of the range</param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="minimum"/> is greater than <paramref name="maximum"/>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// if <paramref name="value"/> is less than <paramref name="minimum"/> or
+        /// greater than or equal to <paramref name="maximum"/>
+        /// </exception>
+        void ArgumentOutOfRange(int value, int minimum, int maximum, string parameterName);
     }
 }

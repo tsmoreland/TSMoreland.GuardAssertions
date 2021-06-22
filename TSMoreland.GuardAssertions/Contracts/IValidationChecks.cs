@@ -11,6 +11,8 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
+using System;
+
 namespace TSMoreland.GuardAssertions.Contracts
 {
     public interface IValidationChecks
@@ -27,5 +29,20 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// isn't empty.
         /// </remarks>
         bool ForArgumentNull(object? @object);
+
+
+        /// <summary>
+        /// returns true if <paramref name="value"/>
+        /// is in the range [minimum, maximum)
+        /// (greater than or equal to minimum and less than maximum)
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="minimum">lower inclusive bound of the range</param>
+        /// <param name="maximum">upper non-incluseive bound of the range</param>
+        /// <returns>true if value is in range; otherwise, false</returns>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="minimum"/> is greater than <paramref name="maximum"/>
+        /// </exception>
+        bool ForArgumentInRange(int value, int minimum, int maximum);
     }
 }

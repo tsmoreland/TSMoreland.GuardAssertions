@@ -1,5 +1,5 @@
-﻿//
-// Copyright © 2021 Terry Moreland
+//
+// Copyright � 2021 Terry Moreland
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
 // to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
 // and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
@@ -12,27 +12,33 @@
 // 
 
 using System;
-using TSMoreland.GuardAssertions.Contracts;
+using NUnit.Framework;
 
-namespace TSMoreland.GuardAssertions
+// Guard conflicts with NUNit name so slight rename required.
+using TSGuard = TSMoreland.GuardAssertions.Guard;
+
+namespace TSMoreland.GuardAssertions.Test
 {
-    public sealed partial class Guard : IValidationChecks
+    public class GuardAssertionTests
     {
-        /// <inheritdoc/>
-        public bool ForArgumentNull(object? @object)
+        [SetUp]
+        public void Setup()
         {
-            return @object == null;
         }
 
-        /// <inheritdoc/>
-        public bool ForArgumentInRange(int value, int minimum, int maximum)
+        [Test]
+        public void ArgumentNull_ThrowsArgumentNullException_WhenArugmentIsNull()
         {
-            if (minimum > maximum)
-            {
-                throw new ArgumentException("Minimum must be less than or equal to maximum");
-            }
+            _ = Assert.Throws<ArgumentNullException>(() => TSGuard.Against.ArgumentNull(null, "parameter"));
+        }
 
-            return value >= minimum && value < maximum;
+        [Test]
+        public void ArgumentNull_ArgumentNullExceptionParameterIsExpectedValue_WhenArugmentIsNull()
+        {
+            string parameterName = "parameter";
+
+            var ex = Assert.Throws<ArgumentNullException>(() => TSGuard.Against.ArgumentNull(null, parameterName));
+            Assert.That(ex?.ParamName, Is.EqualTo(parameterName));
         }
     }
 }

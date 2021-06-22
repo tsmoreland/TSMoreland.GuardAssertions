@@ -23,7 +23,7 @@ namespace TSMoreland.GuardAssertions
         {
             if (@object == null)
             {
-                throw new ArgumentNullException("object is null", parameterName);
+                throw new ArgumentNullException(parameterName, "object is null");
             }
         }
 
@@ -32,7 +32,7 @@ namespace TSMoreland.GuardAssertions
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value is null", parameterName);
+                throw new ArgumentNullException(parameterName, "value is null");
             }
             if (value is not {Length: >0})
             {
@@ -45,11 +45,21 @@ namespace TSMoreland.GuardAssertions
         {
             if (value == null)
             {
-                throw new ArgumentNullException("value is null", parameterName);
+                throw new ArgumentNullException(parameterName, "value is null");
             }
             if (value.Trim() is not {Length: >0})
             {
                 throw new ArgumentException("value is empty or whitespace", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(int value, int minimum, int maximum, string parameterName)
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"value is not in the range {minimum} to {maximum}");
             }
         }
     }
