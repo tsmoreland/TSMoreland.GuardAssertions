@@ -15,5 +15,17 @@ namespace TSMoreland.GuardAssertions.Contracts
 {
     public interface IValidationChecks
     {
+        /// <summary>
+        /// returns true if <paramref name="@object"/> is null
+        /// </summary>
+        /// <param name="object">value to check</param>
+        /// <returns>
+        /// true if <paramref name="@object"/> is null; otherwise false
+        /// </returns>
+        /// <remarks>
+        /// not a particularly useful validation check but more of a place holder so the interface
+        /// isn't empty.
+        /// </remarks>
+        bool ForArgumentNull(object? @object);
     }
 }

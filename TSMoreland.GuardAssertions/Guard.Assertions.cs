@@ -11,11 +11,46 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
+using System;
 using TSMoreland.GuardAssertions.Contracts;
 
 namespace TSMoreland.GuardAssertions
 {
     public sealed partial class Guard : IAssertions
     {
+        /// <inheritdoc/>
+        public void ArgumentNull(object? @object, string parameterName)
+        {
+            if (@object == null)
+            {
+                throw new ArgumentNullException("object is null", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentNullOrEmpty(string? value, string parameterName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value is null", parameterName);
+            }
+            if (value is not {Length: >0})
+            {
+                throw new ArgumentException("value is empty", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentNullOrWhitespace(string? value, string parameterName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException("value is null", parameterName);
+            }
+            if (value.Trim() is not {Length: >0})
+            {
+                throw new ArgumentException("value is empty or whitespace", parameterName);
+            }
+        }
     }
 }
