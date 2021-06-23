@@ -78,7 +78,47 @@ namespace TSMoreland.GuardAssertions.Test
         }
 
         [Test]
-        public void ArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenIntegerLessThanMinimum()
+        public void ShortArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenLessThanMinimum()
+        {
+            const short minimum = 1;
+            const short maximum = 10;
+            const short value = minimum - 1;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        public void ShortArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenGreaterThanOrEqualToMaximum(int incrementBy)
+        {
+            const short minimum = 1;
+            const short maximum = 10;
+            var value = maximum + incrementBy;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
+        [Test]
+        public void ShortArgumenOutOfRange_DoesNotThrow_WhenArgumentEqualToMinimum()
+        {
+            const short minimum = 1;
+            const short maximum = 10;
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(minimum, minimum, maximum, _parameterName));
+        }
+
+        [Test]
+        public void ShortArgumenOutOfRange_DoesNotThrow_WhenArgumentInRange()
+        {
+            const short minimum = 1;
+            const short maximum = 10;
+            const short value = 5;
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
+        [Test]
+        public void ArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenLessThanMinimum()
         {
             const int minimum = 1;
             const int maximum = 10;
@@ -90,7 +130,7 @@ namespace TSMoreland.GuardAssertions.Test
 
         [TestCase(0)]
         [TestCase(1)]
-        public void ArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenIntegerGreaterThanOrEqualToMaximum(int incrementBy)
+        public void Int32ArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenGreaterThanOrEqualToMaximum(int incrementBy)
         {
             const int minimum = 1;
             const int maximum = 10;
@@ -101,7 +141,7 @@ namespace TSMoreland.GuardAssertions.Test
         }
 
         [Test]
-        public void ArgumenOutOfRange_DoesNotThrow_WhenArgumentEqualToMinimum()
+        public void Int32ArgumenOutOfRange_DoesNotThrow_WhenArgumentEqualToMinimum()
         {
             const int minimum = 1;
             const int maximum = 10;
@@ -109,7 +149,7 @@ namespace TSMoreland.GuardAssertions.Test
         }
 
         [Test]
-        public void ArgumenOutOfRange_DoesNotThrow_WhenArgumentInRange()
+        public void Int32ArgumenOutOfRange_DoesNotThrow_WhenArgumentInRange()
         {
             const int minimum = 1;
             const int maximum = 10;
@@ -117,5 +157,44 @@ namespace TSMoreland.GuardAssertions.Test
             Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
         }
 
+        [Test]
+        public void LongArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenLessThanMinimum()
+        {
+            const long minimum = 1;
+            const long maximum = 10;
+            const long value = minimum - 1;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        public void LongArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenGreaterThanOrEqualToMaximum(int incrementBy)
+        {
+            const long minimum = 1;
+            const long maximum = 10;
+            var value = maximum + incrementBy;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
+        [Test]
+        public void LongArgumenOutOfRange_DoesNotThrow_WhenArgumentEqualToMinimum()
+        {
+            const long minimum = 1;
+            const long maximum = 10;
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(minimum, minimum, maximum, _parameterName));
+        }
+
+        [Test]
+        public void LongArgumenOutOfRange_DoesNotThrow_WhenArgumentInRange()
+        {
+            const long minimum = 1;
+            const long maximum = 10;
+            const long value = 5;
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
     }
 }

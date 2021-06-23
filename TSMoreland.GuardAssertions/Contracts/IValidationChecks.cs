@@ -30,6 +30,19 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// </remarks>
         bool ForArgumentNull(object? @object);
 
+        /// <summary>
+        /// returns true if <paramref name="value"/>
+        /// is in the range [minimum, maximum)
+        /// (greater than or equal to minimum and less than maximum)
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="minimum">lower inclusive bound of the range</param>
+        /// <param name="maximum">upper non-incluseive bound of the range</param>
+        /// <returns>true if value is in range; otherwise, false</returns>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="minimum"/> is greater than <paramref name="maximum"/>
+        /// </exception>
+        bool ForArgumentInRange(short value, short minimum, short maximum);
 
         /// <summary>
         /// returns true if <paramref name="value"/>
