@@ -62,5 +62,15 @@ namespace TSMoreland.GuardAssertions
                     $"value is not in the range {minimum} to {maximum}");
             }
         }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(long value, long minimum, long maximum, string parameterName)
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"value is not in the range {minimum} to {maximum}");
+            }
+        }
     }
 }

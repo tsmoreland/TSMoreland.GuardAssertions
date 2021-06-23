@@ -34,5 +34,16 @@ namespace TSMoreland.GuardAssertions
 
             return value >= minimum && value < maximum;
         }
+
+        /// <inheritdoc/>
+        public bool ForArgumentInRange(long value, long minimum, long maximum)
+        {
+            if (minimum > maximum)
+            {
+                throw new ArgumentException("Minimum must be less than or equal to maximum");
+            }
+
+            return value >= minimum && value < maximum;
+        }
     }
 }

@@ -13,32 +13,109 @@
 
 using System;
 using NUnit.Framework;
-
-// Guard conflicts with NUNit name so slight rename required.
-using TSGuard = TSMoreland.GuardAssertions.Guard;
+using TSMoreland.GuardAssertions.Contracts;
 
 namespace TSMoreland.GuardAssertions.Test
 {
     public class GuardAssertionTests
     {
-        [SetUp]
-        public void Setup()
+        private IAssertions GuardAgainst { get; set; } = null!;
+        private const string _parameterName = "parameter";
+
+        [OneTimeSetUp]
+        public void OneTimeSetup()
         {
+            GuardAgainst = Guard.Against;
         }
 
         [Test]
         public void ArgumentNull_ThrowsArgumentNullException_WhenArugmentIsNull()
         {
-            _ = Assert.Throws<ArgumentNullException>(() => TSGuard.Against.ArgumentNull(null, "parameter"));
+            _ = Assert.Throws<ArgumentNullException>(() => GuardAgainst.ArgumentNull(null, _parameterName));
         }
 
         [Test]
         public void ArgumentNull_ArgumentNullExceptionParameterIsExpectedValue_WhenArugmentIsNull()
         {
-            string parameterName = "parameter";
-
-            var ex = Assert.Throws<ArgumentNullException>(() => TSGuard.Against.ArgumentNull(null, parameterName));
-            Assert.That(ex?.ParamName, Is.EqualTo(parameterName));
+            var ex = Assert.Throws<ArgumentNullException>(() => GuardAgainst.ArgumentNull(null, _parameterName));
+            Assert.That(ex?.ParamName, Is.EqualTo(_parameterName));
         }
+
+        [Test]
+        public void ArgumentNull_DoesNotThrowException_WhenArgumentIsNotNull()
+        {
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentNull(new object(), _parameterName));
+        }
+
+        [TestCase(typeof(ArgumentNullException), null)]
+        [TestCase(typeof(ArgumentException), "")]
+        public void ArgumentNullOrEmpty_ThrowsException_WhenArgumentIs(Type exceptionType, string? value)
+        {
+            Assert.Throws(exceptionType, () => GuardAgainst.ArgumentNullOrEmpty(value, _parameterName));
+        }
+
+        [TestCase(" ")]
+        [TestCase("alpha")]
+        public void ArgumentNullOrEmpty_DoesNotThrrow_WhenArgumentIsNonEmpty(string? value)
+        {
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentNullOrEmpty(value, _parameterName));
+        }
+
+        [TestCase(typeof(ArgumentNullException), null)]
+        [TestCase(typeof(ArgumentException), "")]
+        [TestCase(typeof(ArgumentException), " ")]
+        [TestCase(typeof(ArgumentException), "\t")]
+        [TestCase(typeof(ArgumentException), "\n")]
+        public void ArgumentNullOrWhiteSpace_ThrowsException_WhenArgumentIs(Type exceptionType, string? value)
+        {
+            Assert.Throws(exceptionType, () => GuardAgainst.ArgumentNullOrWhitespace(value, _parameterName));
+        }
+
+        [Test]
+        public void ArgumentNullOrWhitespace_DoesNotThrrow_WhenArgumentIsNonWhitespace()
+        {
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentNullOrWhitespace("alpha", _parameterName));
+        }
+
+        [Test]
+        public void ArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenIntegerLessThanMinimum()
+        {
+            const int minimum = 1;
+            const int maximum = 10;
+            const int value = minimum - 1;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
+        [TestCase(0)]
+        [TestCase(1)]
+        public void ArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenIntegerGreaterThanOrEqualToMaximum(int incrementBy)
+        {
+            const int minimum = 1;
+            const int maximum = 10;
+            var value = maximum + incrementBy;
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
+        [Test]
+        public void ArgumenOutOfRange_DoesNotThrow_WhenArgumentEqualToMinimum()
+        {
+            const int minimum = 1;
+            const int maximum = 10;
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(minimum, minimum, maximum, _parameterName));
+        }
+
+        [Test]
+        public void ArgumenOutOfRange_DoesNotThrow_WhenArgumentInRange()
+        {
+            const int minimum = 1;
+            const int maximum = 10;
+            const int value = 5;
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+        }
+
     }
 }
