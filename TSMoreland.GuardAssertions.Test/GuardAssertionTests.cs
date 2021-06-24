@@ -21,6 +21,12 @@ namespace TSMoreland.GuardAssertions.Test
     {
         private IAssertions GuardAgainst { get; set; } = null!;
         private const string _parameterName = "parameter";
+        private static object[] _invalidGuids =
+        {
+            new object[] {typeof(ArgumentNullException), null!},
+            new object[] {typeof(ArgumentException), Guid.Empty},
+        };
+
 
         [OneTimeSetUp]
         public void OneTimeSetup()
@@ -75,6 +81,19 @@ namespace TSMoreland.GuardAssertions.Test
         public void ArgumentNullOrWhitespace_DoesNotThrrow_WhenArgumentIsNonWhitespace()
         {
             Assert.DoesNotThrow(() => GuardAgainst.ArgumentNullOrWhitespace("alpha", _parameterName));
+        }
+
+        [TestCaseSource(nameof(_invalidGuids))]
+        public void ArgumentNullOrEmpty_ThrowsException_WhenArgumentGuidIs(Type exceptionType, Guid? value)
+        {
+            Assert.Throws(exceptionType, () => GuardAgainst.ArgumentNullOrEmpty(value, _parameterName));
+        }
+
+        [Test]
+        public void ArgumentNullOrEmpty_DoesNotThrrow_WhenArgumentGuidIsNonEmpty()
+        {
+            Guid? uuid = new Guid("E3670C5C-73EB-4E90-832F-6183675FDC33");
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentNullOrEmpty(uuid, _parameterName));
         }
 
         [Test]
