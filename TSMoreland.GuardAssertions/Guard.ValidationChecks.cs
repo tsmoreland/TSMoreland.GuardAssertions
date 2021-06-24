@@ -31,6 +31,24 @@ namespace TSMoreland.GuardAssertions
         }
 
         /// <inheritdoc/>
+        public bool ForArgumentNullOrEmpty(string? value)
+        {
+            return value is not {Length: > 0};
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentNullOrWhitespace(string? value)
+        {
+            return value?.Trim() is not {Length: >0};
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentNullOrEmpty(Guid? value)
+        {
+            return value == null || value == Guid.Empty;
+        }
+
+        /// <inheritdoc/>
         public bool ForArgumentInRange(short value, short minimum, short maximum)
         {
             if (minimum > maximum)

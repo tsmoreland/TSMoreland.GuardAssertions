@@ -74,6 +74,26 @@ namespace TSMoreland.GuardAssertions.Contracts
         void ArgumentNullOrWhitespace(string? value, string parameterName);
 
         /// <summary>
+        /// checks if <paramref name="value"/> is null, throwing
+        /// <see cref="ArgumentNullException"/> if it is
+        /// also checks for <paramref name="value"/> being empty,
+        /// throwing <see cref="ArgumentException"/> in that case
+        /// </summary>
+        /// <param name="value">
+        /// value to check
+        /// </param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// if <paramref name="value"/> is null
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="value"/> is empty
+        /// </exception>
+        void ArgumentNullOrEmpty(Guid? value, string parameterName);
+
+        /// <summary>
         /// checks if value is in the range [minimum, maximum)
         /// (greater than or equal to minimum and less than maximum), throwing
         /// <see cref="ArgumentOutOfRangeException"/> if it is not

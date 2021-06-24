@@ -44,6 +44,27 @@ namespace TSMoreland.GuardAssertions.Contracts
         bool ForArgumentNotNull(object? @object);
 
         /// <summary>
+        /// Returns true if <paramref name="value"/> is null or empty
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <returns>true if <paramref name="value"/> is null or empty; otheriwse false</returns>
+        bool ForArgumentNullOrEmpty(string? value);
+
+        /// <summary>
+        /// Returns true if <paramref name="value"/> is null or whitespace 
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <returns>true if <paramref name="value"/> is null or whitespace; otheriwse false</returns>
+        bool ForArgumentNullOrWhitespace(string? value);
+
+        /// <summary>
+        /// Returns true if <paramref name="value"/> is null or empty
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <returns>true if <paramref name="value"/> is null or empty; otheriwse false</returns>
+        bool ForArgumentNullOrEmpty(Guid? value);
+
+        /// <summary>
         /// returns true if <paramref name="value"/>
         /// is in the range [minimum, maximum)
         /// (greater than or equal to minimum and less than maximum)
