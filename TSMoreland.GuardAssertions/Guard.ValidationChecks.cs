@@ -25,6 +25,12 @@ namespace TSMoreland.GuardAssertions
         }
 
         /// <inheritdoc/>
+        public bool ForArgumentNotNull(object? @object)
+        {
+            return @object != null;
+        }
+
+        /// <inheritdoc/>
         public bool ForArgumentInRange(short value, short minimum, short maximum)
         {
             if (minimum > maximum)

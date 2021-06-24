@@ -31,6 +31,19 @@ namespace TSMoreland.GuardAssertions.Contracts
         bool ForArgumentNull(object? @object);
 
         /// <summary>
+        /// returns true if <paramref name="@object"/> is not null
+        /// </summary>
+        /// <param name="object">value to check</param>
+        /// <returns>
+        /// true if <paramref name="@object"/> is not null; otherwise false
+        /// </returns>
+        /// <remarks>
+        /// not a particularly useful validation check but more of a place holder so the interface
+        /// isn't empty.
+        /// </remarks>
+        bool ForArgumentNotNull(object? @object);
+
+        /// <summary>
         /// returns true if <paramref name="value"/>
         /// is in the range [minimum, maximum)
         /// (greater than or equal to minimum and less than maximum)
