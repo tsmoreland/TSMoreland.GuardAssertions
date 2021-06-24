@@ -17,7 +17,7 @@ using TSMoreland.GuardAssertions.Contracts;
 
 namespace TSMoreland.GuardAssertions.Test
 {
-    public class GuardAssertionTests
+    public sealed class GuardAssertionTests
     {
         private IAssertions GuardAgainst { get; set; } = null!;
         private const string _parameterName = "parameter";
@@ -90,11 +90,11 @@ namespace TSMoreland.GuardAssertions.Test
 
         [TestCase(0)]
         [TestCase(1)]
-        public void ShortArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenGreaterThanOrEqualToMaximum(int incrementBy)
+        public void ShortArgumentOutOfRange_ThrowsArgumentOutOfRangeException_WhenGreaterThanOrEqualToMaximum(short incrementBy)
         {
             const short minimum = 1;
             const short maximum = 10;
-            var value = maximum + incrementBy;
+            short value = (short)(maximum + incrementBy);
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>
                 GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
