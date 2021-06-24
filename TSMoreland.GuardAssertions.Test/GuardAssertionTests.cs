@@ -37,7 +37,8 @@ namespace TSMoreland.GuardAssertions.Test
         [Test]
         public void ArgumentNull_ThrowsArgumentNullException_WhenArugmentIsNull()
         {
-            _ = Assert.Throws<ArgumentNullException>(() => GuardAgainst.ArgumentNull(null, _parameterName));
+            var ex = Assert.Throws<ArgumentNullException>(() => GuardAgainst.ArgumentNull(null, _parameterName));
+            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
         }
 
         [Test]
@@ -57,7 +58,8 @@ namespace TSMoreland.GuardAssertions.Test
         [TestCase(typeof(ArgumentException), "")]
         public void ArgumentNullOrEmpty_ThrowsException_WhenArgumentIs(Type exceptionType, string? value)
         {
-            Assert.Throws(exceptionType, () => GuardAgainst.ArgumentNullOrEmpty(value, _parameterName));
+            var ex = Assert.Throws(exceptionType, () => GuardAgainst.ArgumentNullOrEmpty(value, _parameterName));
+            Assert.That((ex as ArgumentException)?.ParamName, Is.EqualTo(_parameterName));
         }
 
         [TestCase(" ")]
@@ -74,7 +76,8 @@ namespace TSMoreland.GuardAssertions.Test
         [TestCase(typeof(ArgumentException), "\n")]
         public void ArgumentNullOrWhiteSpace_ThrowsException_WhenArgumentIs(Type exceptionType, string? value)
         {
-            Assert.Throws(exceptionType, () => GuardAgainst.ArgumentNullOrWhitespace(value, _parameterName));
+            var ex = Assert.Throws(exceptionType, () => GuardAgainst.ArgumentNullOrWhitespace(value, _parameterName));
+            Assert.That((ex as ArgumentException)?.ParamName, Is.EqualTo(_parameterName));
         }
 
         [Test]
@@ -103,8 +106,9 @@ namespace TSMoreland.GuardAssertions.Test
             const short maximum = 10;
             const short value = minimum - 1;
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
         }
 
         [Test]
@@ -127,8 +131,9 @@ namespace TSMoreland.GuardAssertions.Test
             const short maximum = 10;
             short value = (short)(maximum + incrementBy);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
         }
 
         [Test]
@@ -168,8 +173,9 @@ namespace TSMoreland.GuardAssertions.Test
             const int maximum = 10;
             const int value = minimum - 1;
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
         }
 
         [TestCase(0)]
@@ -180,8 +186,9 @@ namespace TSMoreland.GuardAssertions.Test
             const int maximum = 10;
             var value = maximum + incrementBy;
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
         }
 
         [Test]
@@ -220,8 +227,9 @@ namespace TSMoreland.GuardAssertions.Test
             const long maximum = 10;
             const long value = minimum - 1;
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
         }
 
         [TestCase(0)]
@@ -232,8 +240,9 @@ namespace TSMoreland.GuardAssertions.Test
             const long maximum = 10;
             var value = maximum + incrementBy;
 
-            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
                 GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
         }
 
         [Test]
