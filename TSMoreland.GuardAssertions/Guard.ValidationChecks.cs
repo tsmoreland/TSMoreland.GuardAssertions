@@ -53,7 +53,7 @@ namespace TSMoreland.GuardAssertions
         {
             if (minimum > maximum)
             {
-                throw new ArgumentException("Minimum must be less than or equal to maximum");
+                throw new ArgumentException("Minimum must be less than or equal to maximum", nameof(minimum));
             }
 
             return value >= minimum && value < maximum;
@@ -64,7 +64,7 @@ namespace TSMoreland.GuardAssertions
         {
             if (minimum > maximum)
             {
-                throw new ArgumentException("Minimum must be less than or equal to maximum");
+                throw new ArgumentException("Minimum must be less than or equal to maximum", nameof(minimum));
             }
 
             return value >= minimum && value < maximum;
@@ -75,7 +75,7 @@ namespace TSMoreland.GuardAssertions
         {
             if (minimum > maximum)
             {
-                throw new ArgumentException("Minimum must be less than or equal to maximum");
+                throw new ArgumentException("Minimum must be less than or equal to maximum", nameof(minimum));
             }
 
             return value >= minimum && value < maximum;
