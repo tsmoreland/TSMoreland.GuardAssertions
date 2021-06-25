@@ -11,6 +11,7 @@
 // WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 
+using System;
 using TSMoreland.GuardAssertions.Contracts;
 
 namespace TSMoreland.GuardAssertions
@@ -21,6 +22,65 @@ namespace TSMoreland.GuardAssertions
         public bool ForArgumentNull(object? @object)
         {
             return @object == null;
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentNotNull(object? @object)
+        {
+            return @object != null;
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentNullOrEmpty(string? value)
+        {
+            var result = value is not {Length: > 0};
+            return result;
+            //return value is not {Length: > 0};
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentNullOrWhitespace(string? value)
+        {
+            return value?.Trim() is not {Length: >0};
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentNullOrEmpty(Guid? value)
+        {
+            return value == null || value == Guid.Empty;
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentInRange(short value, short minimum, short maximum)
+        {
+            if (minimum > maximum)
+            {
+                throw new ArgumentException("Minimum must be less than or equal to maximum", nameof(minimum));
+            }
+
+            return value >= minimum && value < maximum;
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentInRange(int value, int minimum, int maximum)
+        {
+            if (minimum > maximum)
+            {
+                throw new ArgumentException("Minimum must be less than or equal to maximum", nameof(minimum));
+            }
+
+            return value >= minimum && value < maximum;
+        }
+
+        /// <inheritdoc/>
+        public bool ForArgumentInRange(long value, long minimum, long maximum)
+        {
+            if (minimum > maximum)
+            {
+                throw new ArgumentException("Minimum must be less than or equal to maximum", nameof(minimum));
+            }
+
+            return value >= minimum && value < maximum;
         }
     }
 }

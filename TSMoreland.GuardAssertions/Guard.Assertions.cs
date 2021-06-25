@@ -23,33 +23,76 @@ namespace TSMoreland.GuardAssertions
         {
             if (@object == null)
             {
-                throw new ArgumentNullException("object is null", parameterName);
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
             }
         }
 
         /// <inheritdoc/>
         public void ArgumentNullOrEmpty(string? value, string parameterName)
         {
-            if (value == null)
+            if (value is null)
             {
-                throw new ArgumentNullException("value is null", parameterName);
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
             }
             if (value is not {Length: >0})
             {
-                throw new ArgumentException("value is empty", parameterName);
+                throw new ArgumentException($"{parameterName} is empty", parameterName);
             }
         }
 
         /// <inheritdoc/>
         public void ArgumentNullOrWhitespace(string? value, string parameterName)
         {
-            if (value == null)
+            if (value is null)
             {
-                throw new ArgumentNullException("value is null", parameterName);
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
             }
             if (value.Trim() is not {Length: >0})
             {
-                throw new ArgumentException("value is empty or whitespace", parameterName);
+                throw new ArgumentException($"{parameterName} is empty or whitespace", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentNullOrEmpty(Guid? value, string parameterName)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
+            }
+            if (value == Guid.Empty)
+            {
+                throw new ArgumentException($"{parameterName} is empty", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(short value, short minimum, short maximum, string parameterName)
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"{parameterName} is not in the range {minimum} to {maximum}");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(int value, int minimum, int maximum, string parameterName)
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"{parameterName} is not in the range {minimum} to {maximum}");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(long value, long minimum, long maximum, string parameterName)
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"{parameterName} is not in the range {minimum} to {maximum}");
             }
         }
     }
