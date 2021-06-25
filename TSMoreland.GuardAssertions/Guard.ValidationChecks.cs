@@ -33,7 +33,9 @@ namespace TSMoreland.GuardAssertions
         /// <inheritdoc/>
         public bool ForArgumentNullOrEmpty(string? value)
         {
-            return value is not {Length: > 0};
+            var result = value is not {Length: > 0};
+            return result;
+            //return value is not {Length: > 0};
         }
 
         /// <inheritdoc/>

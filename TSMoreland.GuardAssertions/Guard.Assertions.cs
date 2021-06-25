@@ -30,7 +30,7 @@ namespace TSMoreland.GuardAssertions
         /// <inheritdoc/>
         public void ArgumentNullOrEmpty(string? value, string parameterName)
         {
-            if (value == null)
+            if (value is null)
             {
                 throw new ArgumentNullException(parameterName, $"{parameterName} is null");
             }
@@ -43,7 +43,7 @@ namespace TSMoreland.GuardAssertions
         /// <inheritdoc/>
         public void ArgumentNullOrWhitespace(string? value, string parameterName)
         {
-            if (value == null)
+            if (value is null)
             {
                 throw new ArgumentNullException(parameterName, $"{parameterName} is null");
             }
