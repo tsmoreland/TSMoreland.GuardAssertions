@@ -1,0 +1,32 @@
+name: publish NUGET Package on Release
+
+on:
+  release:
+    types: [published]
+    branches: [ main ]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: publish Nuget
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: ls
+    
+
+# dotnet nuget push .. path to nuget .. --source https://nuget.pkg.github.com/tsmoreland/index.json --skip-duplicate -k ${GITHUB_TOKEN}
