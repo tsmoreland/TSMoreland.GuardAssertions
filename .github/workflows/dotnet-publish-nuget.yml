@@ -20,13 +20,13 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration release
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal --configuration release
     - name: publish Nuget
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: ls TSMoreland.GuardAssertions\bin\Release
+      run: ls TSMoreland.GuardAssertions\bin\Release\TSMoreland.GuardAssertions.0.1.0.snupkg
     
 
 # dotnet nuget push .. path to nuget .. --source https://nuget.pkg.github.com/tsmoreland/index.json --skip-duplicate -k ${GITHUB_TOKEN}
