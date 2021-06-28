@@ -26,5 +26,6 @@ jobs:
     - name: publish Nuget
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: dotnet nuget push TSMoreland.GuardAssertions/bin/Release/TSMoreland.GuardAssertions.0.1.0.nupkg --source https://nuget.pkg.github.com/tsmoreland/index.json --skip-duplicate -k ${GITHUB_TOKEN}
-
+      run: |
+        version=$(grep '<Version>' TSMoreland.GuardAssertions/TSMoreland.GuardAssertions.csproj | sed -e 's/<Version>//g' | sed -e 's/<.*//g' | sed -e 's/^ *//g')
+        echo dotnet nuget push TSMoreland.GuardAssertions/bin/Release/TSMoreland.GuardAssertions.$version.nupkg --source https://nuget.pkg.github.com/tsmoreland/index.json --skip-duplicate -k 
