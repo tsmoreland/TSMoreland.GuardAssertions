@@ -12,11 +12,153 @@
 // 
 
 using System;
+#if NET5_0_OR_GREATER
+using System.Runtime.CompilerServices;
+#endif
 
 namespace TSMoreland.GuardAssertions.Contracts
 {
     public interface IAssertions
     {
+#if NET5_0_OR_GREATER
+
+        /// <summary>
+        /// checks if <paramref name="@object"/> is null, throwing
+        /// <see cref="ArgumentNullException"/> if it is
+        /// </summary>
+        /// <param name="object">
+        /// value to check
+        /// </param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// if <paramref name="object"/> is null
+        /// </exception>
+        void ArgumentNull(object? @object, [CallerArgumentExpression("object")] string parameterName = "");
+
+        /// <summary>
+        /// checks if <paramref name="value"/> is null, throwing
+        /// <see cref="ArgumentNullException"/> if it is
+        /// also checks for <paramref name="value"/> being empty,
+        /// throwing <see cref="ArgumentException"/> in that case
+        /// </summary>
+        /// <param name="value">
+        /// value to check
+        /// </param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// if <paramref name="value"/> is null
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="value"/> is empty
+        /// </exception>
+        void ArgumentNullOrEmpty(string? value, [CallerArgumentExpression("value")] string parameterName);
+
+
+        /// <summary>
+        /// checks if <paramref name="value"/> is null, throwing
+        /// <see cref="ArgumentNullException"/> if it is
+        /// also checks for <paramref name="value"/> being whitespace,
+        /// throwing <see cref="ArgumentException"/> in that case
+        /// </summary>
+        /// <param name="value">
+        /// value to check
+        /// </param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// if <paramref name="value"/> is null
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="value"/> is empty or only contains whitespace
+        /// </exception>
+        void ArgumentNullOrWhitespace(string? value, [CallerArgumentExpression("value")] string parameterName);
+
+        /// <summary>
+        /// checks if <paramref name="value"/> is null, throwing
+        /// <see cref="ArgumentNullException"/> if it is
+        /// also checks for <paramref name="value"/> being empty,
+        /// throwing <see cref="ArgumentException"/> in that case
+        /// </summary>
+        /// <param name="value">
+        /// value to check
+        /// </param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// if <paramref name="value"/> is null
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="value"/> is empty
+        /// </exception>
+        void ArgumentNullOrEmpty(Guid? value, [CallerArgumentExpression("value")] string parameterName = "");
+
+        /// <summary>
+        /// checks if value is in the range [minimum, maximum)
+        /// (greater than or equal to minimum and less than maximum), throwing
+        /// <see cref="ArgumentOutOfRangeException"/> if it is not
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="minimum">lower inclusive bound of the range</param>
+        /// <param name="maximum">upper non-incluseive bound of the range</param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="minimum"/> is greater than <paramref name="maximum"/>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// if <paramref name="value"/> is less than <paramref name="minimum"/> or
+        /// greater than or equal to <paramref name="maximum"/>
+        /// </exception>
+        void ArgumentOutOfRange(short value, short minimum, short maximum, [CallerArgumentExpression("value")] string parameterName = "");
+
+        /// <summary>
+        /// checks if value is in the range [minimum, maximum)
+        /// (greater than or equal to minimum and less than maximum), throwing
+        /// <see cref="ArgumentOutOfRangeException"/> if it is not
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="minimum">lower inclusive bound of the range</param>
+        /// <param name="maximum">upper non-incluseive bound of the range</param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="minimum"/> is greater than <paramref name="maximum"/>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// if <paramref name="value"/> is less than <paramref name="minimum"/> or
+        /// greater than or equal to <paramref name="maximum"/>
+        /// </exception>
+        void ArgumentOutOfRange(int value, int minimum, int maximum, [CallerArgumentExpression("value")] string parameterName = "");
+
+        /// <summary>
+        /// checks if value is in the range [minimum, maximum)
+        /// (greater than or equal to minimum and less than maximum), throwing
+        /// <see cref="ArgumentOutOfRangeException"/> if it is not
+        /// </summary>
+        /// <param name="value">value to check</param>
+        /// <param name="minimum">lower inclusive bound of the range</param>
+        /// <param name="maximum">upper non-incluseive bound of the range</param>
+        /// <param name="parameterName">
+        /// parameter name to use in exception
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// if <paramref name="minimum"/> is greater than <paramref name="maximum"/>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// if <paramref name="value"/> is less than <paramref name="minimum"/> or
+        /// greater than or equal to <paramref name="maximum"/>
+        /// </exception>
+        void ArgumentOutOfRange(long value, long minimum, long maximum, [CallerArgumentExpression("value")] string parameterName = "");
+#else
+
         /// <summary>
         /// checks if <paramref name="@object"/> is null, throwing
         /// <see cref="ArgumentNullException"/> if it is
@@ -152,5 +294,7 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// greater than or equal to <paramref name="maximum"/>
         /// </exception>
         void ArgumentOutOfRange(long value, long minimum, long maximum, string parameterName);
+
+#endif
     }
 }

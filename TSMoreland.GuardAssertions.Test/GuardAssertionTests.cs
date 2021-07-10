@@ -240,9 +240,16 @@ namespace TSMoreland.GuardAssertions.Test
             const long maximum = 10;
             var value = maximum + incrementBy;
 
+#if NET5_0_OR_GREATER
+            var parameterName = "value";
             var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
-            Assert.That(ex!.ParamName, Is.EqualTo(_parameterName));
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum));
+#else
+            var parameterName = _parameterName;
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, parameterName));
+#endif
+            Assert.That(ex!.ParamName, Is.EqualTo(parameterName));
         }
 
         [Test]
@@ -250,7 +257,10 @@ namespace TSMoreland.GuardAssertions.Test
         {
             const long minimum = 1;
             const long maximum = 10;
+#if NET5_0_OR_GREATER
+#else
             Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(minimum, minimum, maximum, _parameterName));
+#endif
         }
 
         [Test]
@@ -259,7 +269,11 @@ namespace TSMoreland.GuardAssertions.Test
             const long minimum = 1;
             const long maximum = 10;
             const long value = 5;
+#if NET5_0_OR_GREATER
+            Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(value, minimum, maximum));
+#else
             Assert.DoesNotThrow(() => GuardAgainst.ArgumentOutOfRange(value, minimum, maximum, _parameterName));
+#endif
         }
     }
 }

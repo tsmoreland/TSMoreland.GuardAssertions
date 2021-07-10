@@ -14,10 +14,94 @@
 using System;
 using TSMoreland.GuardAssertions.Contracts;
 
+#if NET5_0_OR_GREATER
+using System.Runtime.CompilerServices;
+#endif
+
 namespace TSMoreland.GuardAssertions
 {
     public sealed partial class Guard : IAssertions
     {
+#if NET5_0_OR_GREATER
+        /// <inheritdoc/>
+        public void ArgumentNull(object? @object, [CallerArgumentExpression("object")] string parameterName = "")
+        {
+            if (@object == null)
+            {
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentNullOrEmpty(string? value, [CallerArgumentExpression("value")] string parameterName = "")
+        {
+            if (value is null)
+            {
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
+            }
+            if (value is not {Length: >0})
+            {
+                throw new ArgumentException($"{parameterName} is empty", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentNullOrWhitespace(string? value, [CallerArgumentExpression("value")] string parameterName = "")
+        {
+            if (value is null)
+            {
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
+            }
+            if (value.Trim() is not {Length: >0})
+            {
+                throw new ArgumentException($"{parameterName} is empty or whitespace", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentNullOrEmpty(Guid? value, [CallerArgumentExpression("value")] string parameterName = "")
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(parameterName, $"{parameterName} is null");
+            }
+            if (value == Guid.Empty)
+            {
+                throw new ArgumentException($"{parameterName} is empty", parameterName);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(short value, short minimum, short maximum, [CallerArgumentExpression("value")] string parameterName = "")
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"{parameterName} is not in the range {minimum} to {maximum}");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(int value, int minimum, int maximum, [CallerArgumentExpression("value")] string parameterName = "")
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"{parameterName} is not in the range {minimum} to {maximum}");
+            }
+        }
+
+        /// <inheritdoc/>
+        public void ArgumentOutOfRange(long value, long minimum, long maximum, [CallerArgumentExpression("value")] string parameterName = "")
+        {
+            if (!Check.ForArgumentInRange(value, minimum, maximum))
+            {
+                throw new ArgumentOutOfRangeException(parameterName,
+                    $"{parameterName} is not in the range {minimum} to {maximum}");
+            }
+        }
+    }
+#else
         /// <inheritdoc/>
         public void ArgumentNull(object? @object, string parameterName)
         {
@@ -96,4 +180,5 @@ namespace TSMoreland.GuardAssertions
             }
         }
     }
+#endif
 }
