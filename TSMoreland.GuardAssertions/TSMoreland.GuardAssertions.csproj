@@ -7,7 +7,7 @@
     <langversion>9</langversion>
     <nullable>enable</nullable>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <Version>0.1.0</Version>
+    <Version>1.0.0</Version>
     <Description>Guard Check Assertions to verify arguments or values</Description>
     <Copyright>Copyright © 2021 Terry Moreland</Copyright>
     <Product>TSMoreland.GuardAssertions</Product>
