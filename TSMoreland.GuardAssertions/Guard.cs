@@ -29,7 +29,7 @@ namespace TSMoreland.GuardAssertions
         /// <summary>
         /// Singleton instance providing access to Guard Assertions methods
         /// </summary>
-        public static IAssertions Against => _instance.Value;
+        public static IGuardAssertions Against => _instance.Value;
 
         /// <summary>
         /// Singleton instance providing access to Guard Checks

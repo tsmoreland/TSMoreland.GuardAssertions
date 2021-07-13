@@ -35,6 +35,19 @@ namespace TSMoreland.GuardAssertions.Test
 
 
         [Test]
+        public void ForAnyArgumentNull_ReturnsTrue_WhenAtLeastOneItemIsNull()
+        {
+            Assert.That(GuardCheck.ForAnyArgumentNull(new object(), null, new object()), Is.True);
+        }
+
+        [Test]
+        public void ForAnyArgumentNull_ReturnsFalse_WhenAllItemsAreNonNull()
+        {
+            Assert.That(GuardCheck.ForAnyArgumentNull(new object(), new object(), new object()), Is.False);
+        }
+
+
+        [Test]
         public void ForArgumentNull_ReturnsTrue_WhenObjectIsNull()
         {
             Assert.That(GuardCheck.ForArgumentNull(null), Is.True);

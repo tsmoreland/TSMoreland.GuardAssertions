@@ -18,11 +18,20 @@ namespace TSMoreland.GuardAssertions.Contracts
     public interface IValidationChecks
     {
         /// <summary>
-        /// returns true if <paramref name="@object"/> is null
+        /// returns true if <paramref name="objects"/> contains is <see langword="null"/>
+        /// </summary>
+        /// <param name="objects">collection of values to check</param>
+        /// <returns>
+        /// true if <paramref name="objects"/> contains any <see langword="null"/> values; otherwise false
+        /// </returns>
+        bool ForAnyArgumentNull(params object?[] objects);
+
+        /// <summary>
+        /// returns true if <paramref name="@object"/> is <see langword="null"/>
         /// </summary>
         /// <param name="object">value to check</param>
         /// <returns>
-        /// true if <paramref name="@object"/> is null; otherwise false
+        /// true if <paramref name="@object"/> is <see langword="null"/>; otherwise false
         /// </returns>
         /// <remarks>
         /// not a particularly useful validation check but more of a place holder so the interface
@@ -31,7 +40,7 @@ namespace TSMoreland.GuardAssertions.Contracts
         bool ForArgumentNull(object? @object);
 
         /// <summary>
-        /// returns true if <paramref name="@object"/> is not null
+        /// returns true if <paramref name="@object"/> is not <see langword="null"/>
         /// </summary>
         /// <param name="object">value to check</param>
         /// <returns>
@@ -44,24 +53,24 @@ namespace TSMoreland.GuardAssertions.Contracts
         bool ForArgumentNotNull(object? @object);
 
         /// <summary>
-        /// Returns true if <paramref name="value"/> is null or empty
+        /// Returns true if <paramref name="value"/> is <see langword="null"/> or empty
         /// </summary>
         /// <param name="value">value to check</param>
-        /// <returns>true if <paramref name="value"/> is null or empty; otheriwse false</returns>
+        /// <returns>true if <paramref name="value"/> is <see langword="null"/> or empty; otheriwse false</returns>
         bool ForArgumentNullOrEmpty(string? value);
 
         /// <summary>
-        /// Returns true if <paramref name="value"/> is null or whitespace 
+        /// Returns true if <paramref name="value"/> is <see langword="null"/> or whitespace 
         /// </summary>
         /// <param name="value">value to check</param>
-        /// <returns>true if <paramref name="value"/> is null or whitespace; otheriwse false</returns>
+        /// <returns>true if <paramref name="value"/> is <see langword="null"/> or whitespace; otheriwse false</returns>
         bool ForArgumentNullOrWhitespace(string? value);
 
         /// <summary>
-        /// Returns true if <paramref name="value"/> is null or empty
+        /// Returns true if <paramref name="value"/> is <see langword="null"/> or empty
         /// </summary>
         /// <param name="value">value to check</param>
-        /// <returns>true if <paramref name="value"/> is null or empty; otheriwse false</returns>
+        /// <returns>true if <paramref name="value"/> is <see langword="null"/> or empty; otheriwse false</returns>
         bool ForArgumentNullOrEmpty(Guid? value);
 
         /// <summary>

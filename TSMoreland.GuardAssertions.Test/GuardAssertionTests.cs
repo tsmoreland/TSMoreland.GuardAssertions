@@ -19,7 +19,7 @@ namespace TSMoreland.GuardAssertions.Test
 {
     public sealed class GuardAssertionTests
     {
-        private IAssertions GuardAgainst { get; set; } = null!;
+        private IGuardAssertions GuardAgainst { get; set; } = null!;
         private const string _parameterName = "parameter";
         private static object[] _invalidGuids =
         {

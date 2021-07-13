@@ -16,7 +16,7 @@ using TSMoreland.GuardAssertions.Contracts;
 
 namespace TSMoreland.GuardAssertions
 {
-    public sealed partial class Guard : IAssertions
+    public sealed partial class Guard : IGuardAssertions
     {
         /// <inheritdoc/>
         public void ArgumentNull(object? @object, string parameterName)
