@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFrameworks>net472;net5.0</TargetFrameworks>
     <Authors>Terry Moreland</Authors>
     <Company />
     <langversion>9</langversion>

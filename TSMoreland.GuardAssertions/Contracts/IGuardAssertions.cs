@@ -15,10 +15,10 @@ using System;
 
 namespace TSMoreland.GuardAssertions.Contracts
 {
-    public interface IAssertions
+    public interface IGuardAssertions
     {
         /// <summary>
-        /// checks if <paramref name="@object"/> is null, throwing
+        /// checks if <paramref name="@object"/> is <see langword="null"/>, throwing
         /// <see cref="ArgumentNullException"/> if it is
         /// </summary>
         /// <param name="object">
@@ -28,12 +28,12 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// parameter name to use in exception
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// if <paramref name="object"/> is null
+        /// if <paramref name="object"/> is <see langword="null"/>
         /// </exception>
         void ArgumentNull(object? @object, string parameterName);
 
         /// <summary>
-        /// checks if <paramref name="value"/> is null, throwing
+        /// checks if <paramref name="value"/> is <see langword="null"/>, throwing
         /// <see cref="ArgumentNullException"/> if it is
         /// also checks for <paramref name="value"/> being empty,
         /// throwing <see cref="ArgumentException"/> in that case
@@ -45,7 +45,7 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// parameter name to use in exception
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// if <paramref name="value"/> is null
+        /// if <paramref name="value"/> is <see langword="null"/>
         /// </exception>
         /// <exception cref="ArgumentException">
         /// if <paramref name="value"/> is empty
@@ -54,7 +54,7 @@ namespace TSMoreland.GuardAssertions.Contracts
 
 
         /// <summary>
-        /// checks if <paramref name="value"/> is null, throwing
+        /// checks if <paramref name="value"/> is <see langword="null"/>, throwing
         /// <see cref="ArgumentNullException"/> if it is
         /// also checks for <paramref name="value"/> being whitespace,
         /// throwing <see cref="ArgumentException"/> in that case
@@ -66,7 +66,7 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// parameter name to use in exception
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// if <paramref name="value"/> is null
+        /// if <paramref name="value"/> is <see langword="null"/>
         /// </exception>
         /// <exception cref="ArgumentException">
         /// if <paramref name="value"/> is empty or only contains whitespace
@@ -74,7 +74,7 @@ namespace TSMoreland.GuardAssertions.Contracts
         void ArgumentNullOrWhitespace(string? value, string parameterName);
 
         /// <summary>
-        /// checks if <paramref name="value"/> is null, throwing
+        /// checks if <paramref name="value"/> is <see langword="null"/>, throwing
         /// <see cref="ArgumentNullException"/> if it is
         /// also checks for <paramref name="value"/> being empty,
         /// throwing <see cref="ArgumentException"/> in that case
@@ -86,7 +86,7 @@ namespace TSMoreland.GuardAssertions.Contracts
         /// parameter name to use in exception
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// if <paramref name="value"/> is null
+        /// if <paramref name="value"/> is <see langword="null"/>
         /// </exception>
         /// <exception cref="ArgumentException">
         /// if <paramref name="value"/> is empty

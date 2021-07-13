@@ -12,6 +12,7 @@
 // 
 
 using System;
+using System.Linq;
 using TSMoreland.GuardAssertions.Contracts;
 
 namespace TSMoreland.GuardAssertions
@@ -19,23 +20,27 @@ namespace TSMoreland.GuardAssertions
     public sealed partial class Guard : IValidationChecks
     {
         /// <inheritdoc/>
+        public bool ForAnyArgumentNull(params object?[] objects)
+        {
+            return objects.Any(@object => @object is null);
+        }
+
+        /// <inheritdoc/>
         public bool ForArgumentNull(object? @object)
         {
-            return @object == null;
+            return @object is null;
         }
 
         /// <inheritdoc/>
         public bool ForArgumentNotNull(object? @object)
         {
-            return @object != null;
+            return @object is not null;
         }
 
         /// <inheritdoc/>
         public bool ForArgumentNullOrEmpty(string? value)
         {
-            var result = value is not {Length: > 0};
-            return result;
-            //return value is not {Length: > 0};
+            return value is not {Length: > 0};
         }
 
         /// <inheritdoc/>
