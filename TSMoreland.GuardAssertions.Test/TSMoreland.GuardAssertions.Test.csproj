@@ -4,7 +4,7 @@
     <TargetFrameworks>net472;net48;net5.0;net6.0</TargetFrameworks>
     <Authors>Terry Moreland</Authors>
     <Company />
-    <langversion>9</langversion>
+    <langversion>10</langversion>
     <nullable>enable</nullable>
     <Description>Guard Check Assertions to verify arguments or values</Description>
     <Copyright>Copyright © 2021 Terry Moreland</Copyright>
