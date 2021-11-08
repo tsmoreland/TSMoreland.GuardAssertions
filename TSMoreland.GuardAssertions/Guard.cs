@@ -13,27 +13,26 @@
 using System;
 using TSMoreland.GuardAssertions.Contracts;
 
-namespace TSMoreland.GuardAssertions
+namespace TSMoreland.GuardAssertions;
+
+public sealed partial class Guard 
 {
-    public sealed partial class Guard 
+    /// <summary>
+    /// Private Constructor to ensure singleton access is only public method of use
+    /// </summary>
+    private Guard()
     {
-        /// <summary>
-        /// Private Constructor to ensure singleton access is only public method of use
-        /// </summary>
-        private Guard()
-        {
-        }
-
-        private static readonly Lazy<Guard> _instance = new(() => new Guard());
-
-        /// <summary>
-        /// Singleton instance providing access to Guard Assertions methods
-        /// </summary>
-        public static IGuardAssertions Against => _instance.Value;
-
-        /// <summary>
-        /// Singleton instance providing access to Guard Checks
-        /// </summary>
-        public static IValidationChecks Check => _instance.Value;
     }
+
+    private static readonly Lazy<Guard> _instance = new(() => new Guard());
+
+    /// <summary>
+    /// Singleton instance providing access to Guard Assertions methods
+    /// </summary>
+    public static IGuardAssertions Against => _instance.Value;
+
+    /// <summary>
+    /// Singleton instance providing access to Guard Checks
+    /// </summary>
+    public static IValidationChecks Check => _instance.Value;
 }
