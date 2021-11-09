@@ -25,12 +25,14 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Compress build output
-      run: tar czf output.tar.gz TSMoreland.GuardAssertions/bin TSMoreland.GuardAssertions.Test/bin
+      run: |
+        mkdir artifacts
+        tar czf artifacts/output.tar.gz TSMoreland.GuardAssertions/bin TSMoreland.GuardAssertions.Test/bin
     - name: Upload build output
       uses: actions/upload-artifact@v2
       with:
          name: build-artifacts
-         path: output.tar.gz
+         path: artifacts
          retention-days: 1      
 
   
@@ -47,9 +49,11 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: build-artifacts
-        path: output.tar.gz
+        path: artifacts
     - name: Uncompress build output
-      run: tar xzf output.tar.gz
+      run: |
+        ls artifacts
+        tar xzf artifacts/output.tar.gz
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
