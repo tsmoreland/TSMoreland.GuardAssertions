@@ -6,8 +6,8 @@
     <Company />
     <langversion>10</langversion>
     <nullable>enable</nullable>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <Version>1.1.1</Version>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <Version>1.1.2</Version>
     <FileVersion>1.0.0</FileVersion>
     <Description>Guard Check Assertions to verify arguments or values</Description>
     <Copyright>Copyright © 2021 Terry Moreland</Copyright>
@@ -56,7 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
