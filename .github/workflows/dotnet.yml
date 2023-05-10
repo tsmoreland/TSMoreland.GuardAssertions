@@ -15,7 +15,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: |
@@ -25,5 +25,43 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: Compress build output
+      run: |
+        mkdir artifacts
+        tar czf artifacts/output.tar.gz TSMoreland.GuardAssertions/bin TSMoreland.GuardAssertions.Test/bin
+    - name: Upload build output
+      uses: actions/upload-artifact@v2
+      with:
+         name: build-artifacts
+         path: artifacts
+         retention-days: 1      
+
+  
+  test:
+    needs: build
+    strategy:
+      matrix:
+        framework: [net6, net5, net48, net472]
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2    
+    - name: Download build output
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifacts
+        path: artifacts
+    - name: Uncompress build output
+      run: tar xzf artifacts/output.tar.gz
+    - name: Setup .NET 6
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Setup .NET 5
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x        
     - name: Test
-      run: dotnet test --no-build --verbosity normal -f ${{matrix.framework}}
+      run: dotnet test --no-build --verbosity normal -f ${{matrix.framework}}      
+
+   

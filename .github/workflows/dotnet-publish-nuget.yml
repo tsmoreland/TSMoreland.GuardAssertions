@@ -1,0 +1,33 @@
+name: publish NUGET Package on Release
+
+on:
+  release:
+    types: [published]
+    branches: [ main ]
+
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore --configuration release
+    - name: Test
+      run: dotnet test --no-build --verbosity normal --configuration release
+    - name: publish Nuget
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
+      run: |
+        version=$(grep '<Version>' TSMoreland.GuardAssertions/TSMoreland.GuardAssertions.csproj | sed -e 's/<Version>//g' | sed -e 's/<.*//g' | sed -e 's/^ *//g')
+        dotnet nuget push TSMoreland.GuardAssertions/bin/Release/TSMoreland.GuardAssertions.$version.nupkg --source https://nuget.pkg.github.com/tsmoreland/index.json --skip-duplicate -k ${GITHUB_TOKEN}
+        dotnet nuget push TSMoreland.GuardAssertions/bin/Release/TSMoreland.GuardAssertions.$version.nupkg --source https://api.nuget.org/v3/index.json --skip-duplicate -k ${NUGET_API_KEY}
