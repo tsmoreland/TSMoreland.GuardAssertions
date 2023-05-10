@@ -8,6 +8,9 @@ on:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        framework: [net7, net6, net48, net472]
     runs-on: ubuntu-latest
 
     steps:
@@ -15,11 +18,9 @@ jobs:
     - name: Setup .NET 6
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.x
-    - name: Setup .NET 5
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x    
+        dotnet-version: |
+          6.0.x
+          7.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
